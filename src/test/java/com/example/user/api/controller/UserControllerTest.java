@@ -22,15 +22,16 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureMockMvc
 public class UserControllerTest {
-    private final String url = "users";
-
-    private final ObjectMapper mapper = new ObjectMapper();
 
     @Autowired
     private MockMvc mockMvc;
 
     @Autowired
     private UserStorage userStorage;
+
+    private final ObjectMapper mapper = new ObjectMapper();
+
+    private final String url = "users";
 
     @AfterEach
     public void cleanAll() {
@@ -117,7 +118,7 @@ public class UserControllerTest {
     @Test
     public void creatingWithInvalidEmail() throws Exception {
         mapper.findAndRegisterModules();
-        var json = mapper.writeValueAsString(TestData.getUserCreationDto("Invalid Email", LocalDate.now()));
+        var json = mapper.writeValueAsString(TestData.getUserCreationDto("Invalid Email", LocalDate.now().minusYears(1)));
 
         var result = mockMvc.perform(post("/{url}", url)
                 .contentType(MediaType.APPLICATION_JSON)
@@ -230,3 +231,5 @@ public class UserControllerTest {
         assertThat(deletedUser).isEmpty();
     }
 }
+
+
