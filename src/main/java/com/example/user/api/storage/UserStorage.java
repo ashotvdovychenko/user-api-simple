@@ -40,4 +40,8 @@ public class UserStorage {
     public void deleteById(String id) {
         userStorage.remove(id);
     }
+
+    public void deleteAll() {
+        userStorage.clear();
+    }
 }
