@@ -8,7 +8,7 @@ import org.mapstruct.*;
 
 @Mapper
 public interface UserMapper {
-    @Mapping(target = "birthDate", source = "birthDate", dateFormat = "dd-MM-yyyy")
+    @Mapping(target = "birthDate", source = "birthDate", dateFormat = "yyyy-MM-dd")
     UserDto toPayload(User user);
 
     User toEntity(UserCreationDto userDto);
